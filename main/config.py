@@ -12,6 +12,10 @@ from rich.console import Console
 
 console = Console()
 
+def generateDeviceSecret(length = 10):
+    return ''.join(random.choices(string.ascii_uppercase + string.digits, k = length))
+
+
 def config(): # Initiate a Database 
     db = dbconfig()
     cursor = db.cursor()
@@ -52,7 +56,12 @@ def config(): # Initiate a Database
     query = "INSERT INTO pm.secrets (masterkey_hash, device_secret) values(%s, %s)"
     val = (hashed_mp, ds)
     cursor.execute(query, val)
-    db.commit()
+    db.commit() # inserting the values into the table 
+
+    printc("[green][+][/green] Added to the database")
+    printc("[green][+] Configuration done. [/green]")
+
+    db.close()
 
 
 config()
