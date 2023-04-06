@@ -11,6 +11,7 @@ from rich import print as printc
 from rich.console import Console
 
 
+
 def computeMasterKey(mp, ds):
     password = mp.encode()
     salt = ds.encode()
